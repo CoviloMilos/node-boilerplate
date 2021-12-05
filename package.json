@@ -42,7 +42,8 @@
     "mongoose-paginate-v2": "^1.4.2",
     "n": "^8.0.1",
     "query-string": "7.0.1",
-    "reflect-metadata": "0.1.13"
+    "reflect-metadata": "0.1.13",
+    "chain-perk-library": "git+https://github.com/djuromatic/chain-perk-library.git"
   },
   "devDependencies": {
     "@types/body-parser": "1.19.2",
