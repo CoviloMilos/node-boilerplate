@@ -2,10 +2,13 @@ import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
 import i18n from "./i18n.config";
-const { loggingMiddleware } = require("chain-perk-library");
+const { loggingMiddleware, setServiceName } = require("chain-perk-library");
 
 import "../server/controllers/index";
 import { responses } from "../server/responses";
+
+//Logger service name
+setServiceName("boiler-plate");
 
 const app = express();
 
