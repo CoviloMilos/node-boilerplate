@@ -28,6 +28,7 @@
     "@types/sinon-chai": "3.2.6",
     "axios": "0.24.0",
     "body-parser": "1.19.0",
+    "chain-perk-library": "git+https://github.com/djuromatic/chain-perk-library.git",
     "class-transformer": "0.5.1",
     "class-validator": "0.13.2",
     "cors": "2.8.5",
@@ -40,10 +41,10 @@
     "latest": "^0.2.0",
     "mongoose": "6.0.14",
     "mongoose-paginate-v2": "^1.4.2",
-    "n": "^8.0.1",
     "query-string": "7.0.1",
     "reflect-metadata": "0.1.13",
-    "chain-perk-library": "git+https://github.com/djuromatic/chain-perk-library.git"
+    "swagger-express-ts": "1.1.0",
+    "swagger-ui-dist": "4.1.2"
   },
   "devDependencies": {
     "@types/body-parser": "1.19.2",

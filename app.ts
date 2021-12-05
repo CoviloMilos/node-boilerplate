@@ -1,15 +1,16 @@
-import "./config";
-import "reflect-metadata";
-import { container } from "./config/inversify.config";
-import { InversifyExpressServer } from "inversify-express-utils";
-import { expressApp } from "./config/express.config";
-import { Request, Response, NextFunction } from "express";
-import { ResponseError } from "./server/models";
-import { errors } from "./config/constants/error.constant";
-import { DbConnection } from "./config/mongoose.config";
+import './config';
+import 'reflect-metadata';
+import { container } from './config/inversify.config';
+import { InversifyExpressServer } from 'inversify-express-utils';
+import { expressApp } from './config/express.config';
+import { Request, Response, NextFunction } from 'express';
+import { ResponseError } from './server/models';
+import { errors } from './config/constants/error.constant';
+import { DbConnection } from './config/mongoose.config';
 
-const server = new InversifyExpressServer(container, null, { rootPath: "/" }, expressApp);
-server.setErrorConfig((app) => {
+const server = new InversifyExpressServer(container, null, { rootPath: '/' }, expressApp);
+
+server.setErrorConfig(app => {
   app.use((err: ResponseError, req: Request, res: Response, next: NextFunction) => {
     switch (err.code) {
       case 400:
@@ -33,5 +34,5 @@ server.setErrorConfig((app) => {
 });
 const appConfigured = server.build();
 DbConnection.initConnection();
-console.log("Getting ready to start the server...");
+console.log('Getting ready to start the server...');
 appConfigured.listen(process.env.PORT, () => console.log(`Server started on port: ${process.env.PORT}`));

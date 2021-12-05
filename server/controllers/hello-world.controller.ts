@@ -1,11 +1,15 @@
 import { plainToClass } from 'class-transformer';
 import { Request, Response } from 'express';
 import { controller, httpDelete, httpGet, httpPost, httpPut, interfaces, request, response } from 'inversify-express-utils';
+import { ApiOperationGet, ApiPath } from 'swagger-express-ts';
 import { HelloWorldSvc, TYPES } from '../../config';
 import { validateRequestBody } from '../helper';
 import { IHelloWorldService } from '../interfaces';
 import { HelloWorldDto } from '../models';
-
+@ApiPath({
+  name: 'Hello',
+  path: '/hello',
+})
 @controller('/hello', TYPES.RequestContextMiddleware)
 export class HelloWorldController implements interfaces.Controller {
   private helloWorldService: IHelloWorldService;
@@ -26,7 +30,25 @@ export class HelloWorldController implements interfaces.Controller {
     }
   }
 
-  @httpGet('/:id')
+  @ApiOperationGet({
+    description: 'Get hello object',
+    parameters: {
+      path: {
+        hello_id: {
+          description: 'Hello id',
+          required: true,
+        },
+      },
+    },
+    path: '/:hello_id',
+    responses: {
+      200: { description: 'Success' },
+      409: { description: 'Parameters fail' },
+      404: { description: 'Action not exist' },
+    },
+    summary: 'Get hello',
+  })
+  @httpGet('/:hello_id')
   public async sayHello(@request() req: Request, @response() res: Response): Promise<Response | undefined> {
     try {
       const id = req.params.id as string;
