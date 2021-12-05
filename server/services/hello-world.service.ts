@@ -1,6 +1,5 @@
-import { inject, injectable } from 'inversify';
+import { injectable } from 'inversify';
 import { HelloWorldRepo, TYPES } from '../../config';
-import { ConvertToDomain } from '../helper';
 import { IHelloWorldRepository, IHelloWorldService } from '../interfaces';
 import { HelloWorldDto } from '../models';
 
@@ -11,13 +10,21 @@ export class HelloWorldService implements IHelloWorldService {
   constructor(@HelloWorldRepo helloWorldRepository: IHelloWorldRepository) {
     this.helloWorldRepository = helloWorldRepository;
   }
-  async createHello(hello: HelloWorldDto): Promise<HelloWorldDto> {
-    const instanceClass = ConvertToDomain.convertHelloWorld(hello);
-    // this.helloWorldRepository.
-    return await this.helloWorldRepository.createHello(hello);
+
+  async sayHello(id: string): Promise<HelloWorldDto> {
+    return await this.helloWorldRepository.find(id);
   }
-  async sayHello(): Promise<HelloWorldDto> {
-    const value = await this.helloWorldRepository.find('61ab9fb4888bf7da50f038be');
-    return new HelloWorldDto();
+
+  async createHello(hello: HelloWorldDto): Promise<HelloWorldDto> {
+    return await this.helloWorldRepository.create(hello);
+  }
+
+  async updateHello(hello: HelloWorldDto): Promise<HelloWorldDto> {
+    return await this.helloWorldRepository.update(hello);
+  }
+
+  async deleteHello(id: string): Promise<void> {
+    await this.helloWorldRepository.delete(id);
+    return;
   }
 }

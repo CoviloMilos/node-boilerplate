@@ -1,7 +1,5 @@
-export class HelloWorldDto {
-  id: string;
-  hello: string;
+import { BaseDto } from '.';
 
-  createdAt?: Date;
-  updatedAt?: Date;
+export class HelloWorldDto extends BaseDto {
+  hello: string;
 }

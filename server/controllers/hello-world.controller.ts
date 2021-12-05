@@ -1,6 +1,6 @@
 import { plainToClass } from 'class-transformer';
 import { Request, Response } from 'express';
-import { controller, httpGet, httpPost, interfaces, request, response } from 'inversify-express-utils';
+import { controller, httpDelete, httpGet, httpPost, httpPut, interfaces, request, response } from 'inversify-express-utils';
 import { HelloWorldSvc, TYPES } from '../../config';
 import { validateRequestBody } from '../helper';
 import { IHelloWorldService } from '../interfaces';
@@ -14,23 +14,50 @@ export class HelloWorldController implements interfaces.Controller {
     this.helloWorldService = helloWorldService;
   }
 
-  @httpGet('/')
-  public async sayHello(@request() req: Request, @response() res: Response): Promise<Response | undefined> {
+  @httpPost('/')
+  public async createHello(@request() req: Request, @response() res: Response): Promise<Response | undefined> {
     try {
-      const result = await this.helloWorldService.sayHello();
+      const hello = plainToClass(HelloWorldDto, req.body);
+      await validateRequestBody(hello);
+      const result = await this.helloWorldService.createHello(hello);
       return res.ok(result);
     } catch (error) {
       return Promise.reject(error);
     }
   }
 
-  @httpPost('/')
-  public async createHello(@request() req: Request, @response() res: Response): Promise<Response | undefined> {
+  @httpGet('/:id')
+  public async sayHello(@request() req: Request, @response() res: Response): Promise<Response | undefined> {
     try {
-      const helloDto = plainToClass(HelloWorldDto, req.body);
-      await validateRequestBody(helloDto);
-      const result = await this.helloWorldService.createHello(helloDto);
+      const id = req.params.id as string;
+      const result = await this.helloWorldService.sayHello(id);
       return res.ok(result);
+    } catch (error) {
+      return Promise.reject(error);
+    }
+  }
+
+  @httpPut('/:id')
+  public async updateHello(@request() req: Request, @response() res: Response): Promise<Response | undefined> {
+    try {
+      const id = req.params.id as string;
+      const hello = plainToClass(HelloWorldDto, req.body);
+      await validateRequestBody(hello);
+
+      hello.id = id;
+      const result = await this.helloWorldService.updateHello(hello);
+      return res.ok(result);
+    } catch (error) {
+      return Promise.reject(error);
+    }
+  }
+
+  @httpDelete('/:id')
+  public async deleteHello(@request() req: Request, @response() res: Response): Promise<Response | undefined> {
+    try {
+      const id = req.params.id as string;
+      await this.helloWorldService.deleteHello(id);
+      return res.noContent();
     } catch (error) {
       return Promise.reject(error);
     }

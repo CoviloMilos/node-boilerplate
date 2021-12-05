@@ -1,17 +1,10 @@
-import { getModelForClass, modelOptions, mongoose, prop } from '@typegoose/typegoose';
-import { Document } from 'mongoose';
+import { getModelForClass, modelOptions, prop } from '@typegoose/typegoose';
+import { BaseDomain } from './base-domain';
 
 @modelOptions({ schemaOptions: { collection: 'hellos', timestamps: true } })
-export class HelloWorldClass {
-  @prop()
-  public _id: mongoose.Types.ObjectId;
+export class HelloWorldClass extends BaseDomain {
   @prop({ required: true })
   hello: string;
-
-  @prop()
-  createdAt?: Date;
-  @prop()
-  updatedAt?: Date;
 }
 
 const HelloWorld = getModelForClass(HelloWorldClass);

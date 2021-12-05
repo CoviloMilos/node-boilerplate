@@ -1,10 +1,13 @@
-import { AnyParamConstructor } from '@typegoose/typegoose/lib/types';
 import { HelloWorldClass, HelloWorldDto } from '../models';
 
 export class ConvertToDTO {
-  static convert(obj: any, item: AnyParamConstructor<any>): any {
-    if (item.name === HelloWorldClass.name) return this.convertHelloWorld(obj as HelloWorldClass);
-    throw Error('Missing convert definition');
+  static convert(obj: any, className: string): any {
+    switch (className) {
+      case HelloWorldClass.name:
+        return this.convertHelloWorld(obj as HelloWorldClass);
+      default:
+        throw Error('Missing convert dto definition');
+    }
   }
 
   static convertHelloWorld(helloWorld: HelloWorldClass): HelloWorldDto {
@@ -17,9 +20,11 @@ export class ConvertToDTO {
   static convertBase(value: any): any {
     let result: any = {};
     result.id = value._id.toString();
-    result.tenantId = value.tenantId;
-    if (value.updatedAt != undefined) result.updatedAt = value.updatedAt;
-    if (value.createdAt != undefined) result.createdAt = value.createdAt;
+    if (value.createdBy) result.createdBy = value.createdBy;
+    if (value.updatedBy) result.updatedBy = value.updatedBy;
+
+    if (value.createdAt) result.createdAt = value.createdAt;
+    if (value.updatedAt) result.updatedAt = value.updatedAt;
     return result;
   }
 }
