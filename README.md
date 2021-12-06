@@ -1,10 +1,5 @@
 # node-inversify-express-boilerplate
 
-[![Travis](https://img.shields.io/travis/inversify/inversify-express-example.svg?style=flat-square&label=Travis)](https://travis-ci.org/inversify/inversify-express-example)
-[![Dependencies](https://david-dm.org/inversify/inversify-express-example.svg)](https://david-dm.org/inversify/inversify-express-example#info=dependencies)
-[![img](https://david-dm.org/inversify/inversify-express-example/dev-status.svg)](https://david-dm.org/inversify/inversify-express-example/#info=devDependencies)
-[![img](https://david-dm.org/inversify/inversify-express-example/peer-status.svg)](https://david-dm.org/inversify/inversify-express-example/#info=peerDependenciess)
-
 > express + inversify + inversify-express-utils boilerplate
 
 ## Use examples
@@ -31,6 +26,6 @@ $ npm run test
 | ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Basic               | A really basic example with CRUD implementation                                                                                                     |
 | MongoDB             | Used libraries for [mongoose](https://www.npmjs.com/package/mongoose) && [@typegoose/typegoose](https://www.npmjs.com/package/@typegoose/typegoose) |
-| BindingDecorators   | Similar to the basic example. This time with inversify-binding-decorators.                                                                          |
+| BindingDecorators   |                                                                                                                                                     |
 | MiddlewareInjection | A small example that shows how to inject middleware into controllers.                                                                               |
-|  |
+|                     |
