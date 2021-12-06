@@ -1,6 +1,7 @@
-import { Response } from "express";
+import { Response } from 'express';
 
-
-export const noContent = (res: Response) => (data = {}) => {
-  res.status(204);
-};
+export const noContent =
+  (res: Response) =>
+  (data = {}) => {
+    res.status(204);
+  };
