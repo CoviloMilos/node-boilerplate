@@ -3,4 +3,5 @@ export const TYPES = {
   HelloWorldRepository: Symbol("HelloWorldRepository"),
   RequestContextMiddleware: Symbol("RequestContextMiddleware"),
   UserId: Symbol("UserId"),
+  KeycloakService: Symbol("KeycloakService"),
 };

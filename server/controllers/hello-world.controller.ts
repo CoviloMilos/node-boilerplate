@@ -1,12 +1,12 @@
-import { plainToClass } from 'class-transformer';
-import { Request, Response } from 'express';
-import { controller, httpGet, httpPost, interfaces, request, response } from 'inversify-express-utils';
-import { HelloWorldSvc, TYPES } from '../../config';
-import { validateRequestBody } from '../helper';
-import { IHelloWorldService } from '../interfaces';
-import { HelloWorldDto } from '../models';
+import { plainToClass } from "class-transformer";
+import { Request, Response } from "express";
+import { controller, httpGet, httpPost, interfaces, request, response } from "inversify-express-utils";
+import { HelloWorldSvc, TYPES } from "../../config";
+import { validateRequestBody } from "../helper";
+import { IHelloWorldService } from "../interfaces";
+import { HelloWorldDto } from "../models";
 
-@controller('/hello', TYPES.RequestContextMiddleware)
+@controller("/hello", TYPES.RequestContextMiddleware)
 export class HelloWorldController implements interfaces.Controller {
   private helloWorldService: IHelloWorldService;
 
@@ -14,7 +14,7 @@ export class HelloWorldController implements interfaces.Controller {
     this.helloWorldService = helloWorldService;
   }
 
-  @httpGet('/')
+  @httpGet("/")
   public async sayHello(@request() req: Request, @response() res: Response): Promise<Response | undefined> {
     try {
       const result = await this.helloWorldService.sayHello();
@@ -24,7 +24,7 @@ export class HelloWorldController implements interfaces.Controller {
     }
   }
 
-  @httpPost('/')
+  @httpPost("/")
   public async createHello(@request() req: Request, @response() res: Response): Promise<Response | undefined> {
     try {
       const helloDto = plainToClass(HelloWorldDto, req.body);
