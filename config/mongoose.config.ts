@@ -1,16 +1,17 @@
 import mongoose from 'mongoose';
+import { CONSTS } from './constants';
 
 export class DbConnection {
   public static async initConnection() {
-    process.env.DB_CONN_STR = `mongodb://${process.env.MONGODB_HOST}:${process.env.MONGODB_PORT}/${process.env.MONGODB_DATABASE_NAME}`;
+    process.env.DB_CONN_STR = `mongodb://${CONSTS.MONGODB_HOST}:${CONSTS.MONGODB_PORT}/${CONSTS.MONGODB_DATABASE_NAME}`;
     await DbConnection.connect(process.env.DB_CONN_STR);
   }
 
   public static async connect(connStr: string) {
     return mongoose
       .connect(connStr, {
-        user: process.env.MONGODB_USER,
-        pass: process.env.MONGODB_PASSWORD,
+        user: CONSTS.MONGODB_USER,
+        pass: CONSTS.MONGODB_PASSWORD,
       })
       .then(() => {
         console.log(`Successfully connected to ${connStr}`);
