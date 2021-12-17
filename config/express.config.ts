@@ -35,5 +35,6 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(cors({ credentials: true, origin: [process.env.LOCAL_PORTAL!] }));
+// TODO: set origin
+app.use(cors({ credentials: true, origin: [`${process.env.LOCAL_PORTAL}`] }));
 export const expressApp = app;

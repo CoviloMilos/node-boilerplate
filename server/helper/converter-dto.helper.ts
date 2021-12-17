@@ -1,4 +1,4 @@
-import { HelloWorldClass, HelloWorldDto } from "../models";
+import { HelloWorldClass, HelloWorldDto, ResponseError } from "../models";
 
 export class ConvertToDTO {
   static convert(obj: any, className: string): any {
@@ -6,7 +6,7 @@ export class ConvertToDTO {
       case HelloWorldClass.name:
         return this.convertHelloWorld(obj as HelloWorldClass);
       default:
-        throw Error("Missing convert dto definition");
+        throw new ResponseError("Convert to dto error", "Missing convert dto definition", 500);
     }
   }
 
@@ -18,7 +18,7 @@ export class ConvertToDTO {
   }
 
   static convertBase(value: any): any {
-    let result: any = {};
+    const result: any = {};
     result.id = value._id.toString();
     if (value.createdBy) result.createdBy = value.createdBy;
     if (value.updatedBy) result.updatedBy = value.updatedBy;

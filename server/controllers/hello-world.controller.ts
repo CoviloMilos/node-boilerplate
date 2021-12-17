@@ -29,7 +29,7 @@ export class HelloWorldController implements interfaces.Controller {
   @httpGet("/:hello_id")
   public async sayHello(@request() req: Request, @response() res: Response): Promise<Response | undefined> {
     try {
-      const id = req.params.id as string;
+      const id = req.params.hello_id;
       const result = await this.helloWorldService.sayHello(id);
       return res.ok(result);
     } catch (error) {
@@ -40,7 +40,7 @@ export class HelloWorldController implements interfaces.Controller {
   @httpPut("/:id")
   public async updateHello(@request() req: Request, @response() res: Response): Promise<Response | undefined> {
     try {
-      const id = req.params.id as string;
+      const id = req.params.id;
       const hello = plainToClass(HelloWorldDto, req.body);
       await validateRequestBody(hello);
 
@@ -55,7 +55,7 @@ export class HelloWorldController implements interfaces.Controller {
   @httpDelete("/:id")
   public async deleteHello(@request() req: Request, @response() res: Response): Promise<Response | undefined> {
     try {
-      const id = req.params.id as string;
+      const id = req.params.id;
       await this.helloWorldService.deleteHello(id);
       return res.noContent();
     } catch (error) {

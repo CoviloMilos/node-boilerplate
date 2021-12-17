@@ -1,5 +1,5 @@
 import { injectable } from "inversify";
-import { HelloWorldRepo, TYPES } from "../../config";
+import { HelloWorldRepo } from "../../config";
 import { IHelloWorldRepository, IHelloWorldService } from "../interfaces";
 import { HelloWorldDto } from "../models";
 

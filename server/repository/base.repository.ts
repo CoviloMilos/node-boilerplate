@@ -21,6 +21,7 @@ export abstract class BaseRepository<TDto extends BaseDto, TDomain extends AnyPa
 
   async find(id: string): Promise<TDto> {
     try {
+      console.log(id);
       const result = await this.dataModel.findById(id);
       if (result == null) return Promise.reject(errors.resourceNotFound(i18n.__(this.entityName)));
       return ConvertToDTO.convert(result, this.entity.name);

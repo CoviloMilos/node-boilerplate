@@ -12,4 +12,7 @@ export class HelloWorldRepository
   constructor() {
     super(HelloWorldClass, EntityName.HelloWorld);
   }
+  whatever(): Promise<void> {
+    throw new Error("Method not implemented.");
+  }
 }

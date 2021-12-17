@@ -1,7 +1,7 @@
 import { errors } from "../../config/constants/error.constant";
 import { validateOrReject } from "class-validator";
 
-export const validateRequestBody = async (object: Object) => {
+export const validateRequestBody = async (object: any): Promise<void> => {
   try {
     await validateOrReject(object);
   } catch (error) {

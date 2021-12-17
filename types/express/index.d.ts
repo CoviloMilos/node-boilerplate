@@ -1,17 +1,18 @@
-import * as express from 'express';
+import * as express from "express";
+import { ResponseError } from "../../server/models";
 
 declare global {
   namespace Express {
     export interface Response {
       ok?: any;
-      created?: any;
+      created?: ResponseError;
       noContent?: any;
-      badRequest?: any;
-      conflict?: any;
-      notFound?: any;
-      unauthorized?: any;
-      forbidden?: any;
-      serverError?: any;
+      badRequest?: ResponseError;
+      conflict?: ResponseError;
+      notFound?: ResponseError;
+      unauthorized?: ResponseError;
+      forbidden?: ResponseError;
+      serverError?: ResponseError;
     }
   }
 }

@@ -1,5 +1,5 @@
 import { mongoose } from "@typegoose/typegoose";
-import { HelloWorldClass, HelloWorldDto } from "../models";
+import { HelloWorldClass, HelloWorldDto, ResponseError } from "../models";
 
 export class ConvertToDomain {
   static convert(obj: any, className: string): any {
@@ -7,7 +7,7 @@ export class ConvertToDomain {
       case HelloWorldClass.name:
         return this.convertHelloWorld(obj as HelloWorldDto);
       default:
-        throw Error("Missing convert domain definition");
+        throw new ResponseError("Convert to domain error", "Missing convert domain definition", 500);
     }
   }
 
@@ -19,7 +19,7 @@ export class ConvertToDomain {
   }
 
   static convertBase(value: any): any {
-    let result: any = {};
+    const result: any = {};
     result._id = value.id ? new mongoose.Types.ObjectId(value.id) : new mongoose.Types.ObjectId();
 
     if (value.createdBy) result.createdBy = value.createdBy;
