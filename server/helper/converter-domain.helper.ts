@@ -20,9 +20,7 @@ export class ConvertToDomain {
 
   static convertBase(value: any): any {
     let result: any = {};
-    result._id = value.id
-      ? new mongoose.Types.ObjectId(value.id)
-      : new mongoose.Types.ObjectId();
+    result._id = value.id ? new mongoose.Types.ObjectId(value.id) : new mongoose.Types.ObjectId();
 
     if (value.createdBy) result.createdBy = value.createdBy;
     if (value.updatedBy) result.updatedBy = value.updatedBy;

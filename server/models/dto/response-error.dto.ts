@@ -4,13 +4,7 @@ export class ResponseError implements Error {
   public code: number | undefined;
   public stack: string | undefined;
   public validationErrors: Object | undefined;
-  constructor(
-    name: string,
-    message: string,
-    code?: number,
-    stack?: string,
-    validationErrors?: Object,
-  ) {
+  constructor(name: string, message: string, code?: number, stack?: string, validationErrors?: Object) {
     this.name = name;
     this.message = message;
     this.code = code;

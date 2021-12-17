@@ -23,9 +23,7 @@ export class DbConnection {
   }
 
   public static setAutoReconnect() {
-    mongoose.connection.on("disconnected", () =>
-      DbConnection.connect(process.env.DB_CONN_STR!),
-    );
+    mongoose.connection.on("disconnected", () => DbConnection.connect(process.env.DB_CONN_STR!));
   }
 
   public static async disconnect() {
