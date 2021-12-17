@@ -5,11 +5,11 @@
 ## Use examples
 
 First of all run `npm install`
-Run prettier to format code `prettier --write ./server`
+Run prettier to format code `npm run format`
 
 ```
 $ npm install -g ts-node
-$ prettier --write ./server
+$ npm run format
 ```
 
 This will start up the server.
