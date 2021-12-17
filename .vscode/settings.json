@@ -6,7 +6,6 @@
   "diffEditor.ignoreTrimWhitespace": false,
   "git.enableSmartCommit": true,
   "git.confirmSync": false,
-  "javascript.implicitProjectConfig.experimentalDecorators": true,
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
@@ -22,7 +21,5 @@
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "prettier.printWidth": 140,
-  "prettier.trailingComma": "all",
   "editor.formatOnSave": true
 }
