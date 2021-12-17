@@ -1,7 +1,7 @@
-import { injectable } from 'inversify';
-import { HelloWorldRepo, TYPES } from '../../config';
-import { IHelloWorldRepository, IHelloWorldService } from '../interfaces';
-import { HelloWorldDto } from '../models';
+import { injectable } from "inversify";
+import { HelloWorldRepo, TYPES } from "../../config";
+import { IHelloWorldRepository, IHelloWorldService } from "../interfaces";
+import { HelloWorldDto } from "../models";
 
 @injectable()
 export class HelloWorldService implements IHelloWorldService {

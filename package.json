@@ -12,7 +12,8 @@
     "build-ts": "tsc -p ./tsconfig.json",
     "watch-node": "nodemon ./dist/app.js",
     "watch": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"yellow.bold,green.bold\" \"npm run watch-ts\" \"npm run watch-node\"",
-    "test": "npm run build-ts && cross-env NODE_ENV=local mocha './dist/**/*.spec.js'"
+    "test": "npm run build-ts && cross-env NODE_ENV=local mocha './dist/**/*.spec.js'",
+    "format": "prettier --write \"server/**/*.ts\" \"config/**/*.ts\""
   },
   "keywords": [
     "boilerplate",
@@ -27,18 +28,22 @@
     "@types/sinon-chai": "3.2.6",
     "axios": "0.24.0",
     "body-parser": "1.19.1",
+    "chain-perk-library": "git+https://github.com/djuromatic/chain-perk-library.git",
     "class-transformer": "0.5.1",
     "class-validator": "0.13.2",
     "cors": "2.8.5",
     "dotenv": "10.0.0",
+    "eslint": "^8.4.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.25.3",
     "express": "4.17.1",
     "express-validator": "6.14.0",
     "i18n": "0.13.3",
     "inversify": "6.0.1",
     "inversify-express-utils": "6.4.3",
     "mongoose": "6.0.14",
-    "reflect-metadata": "0.1.13",
-    "chain-perk-library": "git+https://github.com/djuromatic/chain-perk-library.git"
+    "prettier": "^2.5.1",
+    "reflect-metadata": "0.1.13"
   },
   "devDependencies": {
     "@types/body-parser": "1.19.2",

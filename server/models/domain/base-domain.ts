@@ -1,5 +1,5 @@
-import { mongoose, prop } from '@typegoose/typegoose';
-import { UserSubSetDomain } from './user-subset.domain';
+import { mongoose, prop } from "@typegoose/typegoose";
+import { UserSubSetDomain } from "./user-subset.domain";
 
 export class BaseDomain {
   @prop({ required: true })

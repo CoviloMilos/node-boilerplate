@@ -1,4 +1,4 @@
-import { BaseDto } from '../../models';
+import { BaseDto } from "../../models";
 
 export interface IBaseRepository<T extends BaseDto> {
   find(id: string): Promise<T>;

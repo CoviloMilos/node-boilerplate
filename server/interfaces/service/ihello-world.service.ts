@@ -1,4 +1,4 @@
-import { HelloWorldDto } from '../../models';
+import { HelloWorldDto } from "../../models";
 
 export interface IHelloWorldService {
   sayHello(id: string): Promise<HelloWorldDto>;

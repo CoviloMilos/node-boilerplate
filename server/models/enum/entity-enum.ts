@@ -1,3 +1,3 @@
 export enum EntityName {
-  HelloWorld = 'Hello World',
+  HelloWorld = "Hello World",
 }

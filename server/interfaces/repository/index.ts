@@ -1,2 +1,2 @@
-export * from './ihello-world.repository';
-export * from './ibase.repository';
+export * from "./ihello-world.repository";
+export * from "./ibase.repository";

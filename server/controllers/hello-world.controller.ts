@@ -1,6 +1,15 @@
 import { plainToClass } from "class-transformer";
 import { Request, Response } from "express";
-import { controller, httpDelete, httpGet, httpPost, httpPut, interfaces, request, response } from "inversify-express-utils";
+import {
+  controller,
+  httpDelete,
+  httpGet,
+  httpPost,
+  httpPut,
+  interfaces,
+  request,
+  response,
+} from "inversify-express-utils";
 import { HelloWorldSvc, TYPES } from "../../config";
 import { validateRequestBody } from "../helper";
 import { IHelloWorldService } from "../interfaces";
@@ -15,7 +24,10 @@ export class HelloWorldController implements interfaces.Controller {
   }
 
   @httpPost("/")
-  public async createHello(@request() req: Request, @response() res: Response): Promise<Response | undefined> {
+  public async createHello(
+    @request() req: Request,
+    @response() res: Response,
+  ): Promise<Response | undefined> {
     try {
       const hello = plainToClass(HelloWorldDto, req.body);
       await validateRequestBody(hello);
@@ -27,7 +39,10 @@ export class HelloWorldController implements interfaces.Controller {
   }
 
   @httpGet("/:hello_id")
-  public async sayHello(@request() req: Request, @response() res: Response): Promise<Response | undefined> {
+  public async sayHello(
+    @request() req: Request,
+    @response() res: Response,
+  ): Promise<Response | undefined> {
     try {
       const id = req.params.id as string;
       const result = await this.helloWorldService.sayHello(id);
@@ -38,7 +53,10 @@ export class HelloWorldController implements interfaces.Controller {
   }
 
   @httpPut("/:id")
-  public async updateHello(@request() req: Request, @response() res: Response): Promise<Response | undefined> {
+  public async updateHello(
+    @request() req: Request,
+    @response() res: Response,
+  ): Promise<Response | undefined> {
     try {
       const id = req.params.id as string;
       const hello = plainToClass(HelloWorldDto, req.body);
@@ -53,7 +71,10 @@ export class HelloWorldController implements interfaces.Controller {
   }
 
   @httpDelete("/:id")
-  public async deleteHello(@request() req: Request, @response() res: Response): Promise<Response | undefined> {
+  public async deleteHello(
+    @request() req: Request,
+    @response() res: Response,
+  ): Promise<Response | undefined> {
     try {
       const id = req.params.id as string;
       await this.helloWorldService.deleteHello(id);

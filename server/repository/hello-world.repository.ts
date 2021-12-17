@@ -1,8 +1,8 @@
-import { AnyParamConstructor } from '@typegoose/typegoose/lib/types';
-import { injectable } from 'inversify';
-import { IHelloWorldRepository } from '../interfaces';
-import { EntityName, HelloWorldClass, HelloWorldDto } from '../models';
-import { BaseRepository } from './base.repository';
+import { AnyParamConstructor } from "@typegoose/typegoose/lib/types";
+import { injectable } from "inversify";
+import { IHelloWorldRepository } from "../interfaces";
+import { EntityName, HelloWorldClass, HelloWorldDto } from "../models";
+import { BaseRepository } from "./base.repository";
 
 @injectable()
 export class HelloWorldRepository

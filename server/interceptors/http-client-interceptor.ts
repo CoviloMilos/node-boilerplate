@@ -1,7 +1,7 @@
-import { injectable, unmanaged } from 'inversify';
-import axios, { AxiosInstance, AxiosResponse, AxiosRequestConfig } from 'axios';
+import { injectable, unmanaged } from "inversify";
+import axios, { AxiosInstance, AxiosResponse, AxiosRequestConfig } from "axios";
 
-declare module 'axios' {
+declare module "axios" {
   interface AxiosResponse<T = any> extends Promise<T> {}
 }
 
@@ -25,7 +25,10 @@ export abstract class HttpClient {
   };
 
   private initializeResponseInterceptor = () => {
-    this.instance.interceptors.response.use(this.handleResponse, this.handleError);
+    this.instance.interceptors.response.use(
+      this.handleResponse,
+      this.handleError,
+    );
   };
 
   private handleResponse = ({ data }: AxiosResponse) => {

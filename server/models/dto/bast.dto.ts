@@ -1,4 +1,4 @@
-import { UserSubSetDto } from '.';
+import { UserSubSetDto } from ".";
 
 export class BaseDto {
   id!: string;
