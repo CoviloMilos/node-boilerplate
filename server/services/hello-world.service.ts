@@ -10,6 +10,9 @@ export class HelloWorldService implements IHelloWorldService {
   constructor(@HelloWorldRepo helloWorldRepository: IHelloWorldRepository) {
     this.helloWorldRepository = helloWorldRepository;
   }
+  async findAllHellos(filterParams: any): Promise<HelloWorldDto[]> {
+    return await this.helloWorldRepository.findAll(filterParams);
+  }
 
   async sayHello(id: string): Promise<HelloWorldDto> {
     return await this.helloWorldRepository.find(id);

@@ -6,8 +6,8 @@ import { IBaseRepository } from "../interfaces";
 import { errors } from "../../config";
 import { BaseDomain, BaseDto } from "../models";
 import { EntityName } from "../models/enum";
-
 import i18n from "../../config/i18n.config";
+
 @injectable()
 export abstract class BaseRepository<TDto extends BaseDto, TDomain extends AnyParamConstructor<BaseDomain>>
   implements IBaseRepository<TDto>
@@ -17,6 +17,15 @@ export abstract class BaseRepository<TDto extends BaseDto, TDomain extends AnyPa
   // @unmanaged() prevent users from forgetting to inject all the required arguments into a Base class
   constructor(@unmanaged() public entity: TDomain, @unmanaged() public entityName: EntityName) {
     this.dataModel = getModelForClass(entity);
+  }
+
+  async findAll(filterParams: any): Promise<TDto[]> {
+    try {
+      const result = await this.dataModel.find(filterParams);
+      return result.map((obj) => Converter.convertDto(obj.toObject(), this.entity.name));
+    } catch (error: any) {
+      return Promise.reject(errors.operationFailed(i18n.__("Repository_get"), error.message));
+    }
   }
 
   async find(id: string): Promise<TDto> {

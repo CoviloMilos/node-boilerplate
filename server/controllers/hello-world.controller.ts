@@ -14,6 +14,17 @@ export class HelloWorldController implements interfaces.Controller {
     this.helloWorldService = helloWorldService;
   }
 
+  @httpGet("/")
+  public async findHellos(@request() req: Request, @response() res: Response): Promise<Response | undefined> {
+    try {
+      const filterParams = req.query;
+      const result = await this.helloWorldService.findAllHellos(filterParams);
+      return res.ok(result);
+    } catch (error) {
+      return Promise.reject(error);
+    }
+  }
+
   @httpPost("/")
   public async createHello(@request() req: Request, @response() res: Response): Promise<Response | undefined> {
     try {
