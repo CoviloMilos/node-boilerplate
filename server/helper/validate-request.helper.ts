@@ -1,10 +1,11 @@
 import { errors } from "../../config/constants/error.constant";
-import { validateOrReject } from "class-validator";
+import { validateOrReject, ValidationError } from "class-validator";
 
-export const validateRequestBody = async (object: any): Promise<void> => {
+// eslint-disable-next-line @typescript-eslint/ban-types
+export const validateRequestBody = async (object: Object): Promise<void> => {
   try {
     await validateOrReject(object);
   } catch (error) {
-    return Promise.reject(errors.invalidRequest(error));
+    return Promise.reject(errors.invalidRequest(error as ValidationError[]));
   }
 };

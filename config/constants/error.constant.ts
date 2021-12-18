@@ -1,3 +1,4 @@
+import { ValidationError } from "class-validator";
 import { ResponseError } from "../../server/models";
 import i18n from "../i18n.config";
 
@@ -22,17 +23,12 @@ export const errors = {
     return responseError;
   },
 
-  invalidRequest: (error: any): ResponseError => {
-    const validationErrors = error.map((e: any) => {
-      const propety = e.property;
-      let message = "";
+  invalidRequest: (error: ValidationError[]): ResponseError => {
+    const validationErrors = error.map((e: ValidationError) => {
+      let message = "Unknown";
+      if (e.constraints) message = e.constraints[Object.keys(e.constraints)[0]];
 
-      // Used only for nested objects validation
-      if (e.children.length > 0 && !e.constraints) {
-        const contraint: any = e.children[0].children[0].constraints;
-        message = contraint[Object.keys(contraint)[0]];
-      } else message = e.constraints[Object.keys(e.constraints)[0]];
-      return { propety, message };
+      return { property: e.property, message: message };
     });
 
     const responseError = new ResponseError(i18n.__("Invalid_request"), "", 400, undefined, validationErrors);

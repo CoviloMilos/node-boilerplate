@@ -5,14 +5,14 @@ declare global {
   namespace Express {
     export interface Response {
       ok?: any;
-      created?: ResponseError;
-      noContent?: any;
-      badRequest?: ResponseError;
-      conflict?: ResponseError;
-      notFound?: ResponseError;
-      unauthorized?: ResponseError;
-      forbidden?: ResponseError;
-      serverError?: ResponseError;
+      created(err: ResponseError): any;
+      noContent(): any;
+      badRequest(err: ResponseError): any;
+      conflict(err: ResponseError): any;
+      notFound(err: ResponseError): any;
+      unauthorized(err: ResponseError): any;
+      forbidden(err: ResponseError): any;
+      serverError(err: ResponseError): any;
     }
   }
 }
