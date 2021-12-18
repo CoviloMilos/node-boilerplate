@@ -1,21 +1,24 @@
 import { mongoose, prop } from "@typegoose/typegoose";
-import { Expose } from "class-transformer";
 import { UserSubSetDomain } from "./user-subset.domain";
+import { AutoMap } from "@automapper/classes";
 
 export class BaseDomain {
   @prop({ required: true })
   _id: mongoose.Types.ObjectId;
 
-  @Expose()
+  @AutoMap({ typeFn: () => UserSubSetDomain })
   @prop({ type: UserSubSetDomain, _id: false })
   createdBy!: UserSubSetDomain;
-  @Expose()
+
+  @AutoMap({ typeFn: () => UserSubSetDomain })
   @prop({ type: UserSubSetDomain, _id: false })
   updatedBy!: UserSubSetDomain;
-  @Expose()
+
+  @AutoMap()
   @prop()
   createdAt?: Date;
-  @Expose()
+
+  @AutoMap()
   @prop()
   updatedAt?: Date;
 }

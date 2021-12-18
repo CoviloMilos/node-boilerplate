@@ -1,7 +1,7 @@
 import { getModelForClass } from "@typegoose/typegoose";
 import { AnyParamConstructor, ReturnModelType } from "@typegoose/typegoose/lib/types";
 import { injectable, unmanaged } from "inversify";
-import { ConvertToDomain, ConvertToDTO } from "../helper";
+import { Converter } from "../helper";
 import { IBaseRepository } from "../interfaces";
 import { errors } from "../../config";
 import { BaseDomain, BaseDto } from "../models";
@@ -21,18 +21,18 @@ export abstract class BaseRepository<TDto extends BaseDto, TDomain extends AnyPa
 
   async find(id: string): Promise<TDto> {
     try {
-      const result = await this.dataModel.findById(id);
+      const result = await this.dataModel.findById(id).lean();
       if (result == null) return Promise.reject(errors.resourceNotFound(i18n.__(this.entityName)));
-      return ConvertToDTO.convert(result, this.entity.name);
+      return Converter.convertDto(result, this.entity.name);
     } catch (error: any) {
       return Promise.reject(errors.operationFailed(i18n.__("Repository_get"), error.message));
     }
   }
   async create(item: TDto): Promise<TDto> {
     try {
-      const itemClass: TDomain = ConvertToDomain.convert(item, this.entity.name);
+      const itemClass: TDomain = Converter.convertDomain(item, this.entity.name);
       const result = await this.dataModel.create(itemClass);
-      return ConvertToDTO.convert(result, this.entity.name);
+      return Converter.convertDto(result.toObject(), this.entity.name);
     } catch (error: any) {
       return Promise.reject(errors.operationFailed(i18n.__("Repository_create"), error.message));
     }
@@ -40,9 +40,10 @@ export abstract class BaseRepository<TDto extends BaseDto, TDomain extends AnyPa
 
   async update(item: TDto, newRecord = true): Promise<TDto> {
     try {
-      const itemClass = ConvertToDomain.convert(item, this.entity.name);
+      const itemClass = Converter.convertDomain(item, this.entity.name);
       const result = await this.dataModel.findByIdAndUpdate(item.id, itemClass, { new: newRecord });
-      return ConvertToDTO.convert(result, this.entity.name);
+      if (result == null) return Promise.reject(errors.resourceNotFound(i18n.__(this.entityName)));
+      return Converter.convertDto(result.toObject(), this.entity.name);
     } catch (error: any) {
       return Promise.reject(errors.operationFailed(i18n.__("Repository_update"), error.message));
     }

@@ -1,18 +1,20 @@
-import { Expose } from "class-transformer";
 import { IsNotEmpty } from "class-validator";
 import { UserSubSetDto } from ".";
+import { AutoMap } from "@automapper/classes";
 
 export class BaseDto {
   id!: string;
 
-  @Expose()
+  @AutoMap({ typeFn: () => UserSubSetDto })
   createdBy!: UserSubSetDto;
-  @Expose()
+
+  @AutoMap({ typeFn: () => UserSubSetDto })
   updatedBy!: UserSubSetDto;
 
-  @Expose()
+  @AutoMap()
   @IsNotEmpty()
   createdAt?: Date;
-  @Expose()
+
+  @AutoMap()
   updatedAt?: Date;
 }
