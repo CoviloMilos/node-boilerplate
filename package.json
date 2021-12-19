@@ -1,7 +1,7 @@
 {
-  "name": "boilerplate",
+  "name": "perk-user-management",
   "version": "1.0.0",
-  "description": "Node JS boilerplate",
+  "description": "Perk User Management",
   "main": "index.js",
   "scripts": {
     "start": "npm run serve",
@@ -16,7 +16,7 @@
     "format": "prettier --write \"server/**/*.ts\" \"config/**/*.ts\""
   },
   "keywords": [
-    "boilerplate",
+    "user-management",
     "microservice"
   ],
   "author": "Milos Covilo",
